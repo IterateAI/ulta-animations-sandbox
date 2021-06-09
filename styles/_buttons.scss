@@ -1,0 +1,390 @@
+button,
+.button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 400;
+  min-width: 96px;
+  padding: 1.5em 2em;
+  margin: 0 0 1rem 0;
+  transform-origin: 50% 50%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  z-index: 0;
+  
+  // We need to use a pseudo-element as the background of the button in order to scale it without scaling all of the button's contents
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform-origin: 50% 50%;
+    transform: scale(1);
+    transition: transform 200ms linear;
+  }
+}
+
+.button.primary:not(.icon),
+.button.secondary:not(.icon) {
+  transition: opacity 100ms linear;
+  
+  i {
+    display: inline-block;
+    width: 0;
+    transform: scale(0);
+    transition: all 200ms linear;
+  }
+  
+  &:hover,
+  &:focus {
+    outline: 0;
+    
+    &:after {
+      transform: scale(1.1);
+    }
+    
+    i {
+      width: 1rem;
+      transform: scale(1);
+    }
+  }
+  
+  &:active:after {
+    transform: scale(0.95);
+  }
+}
+
+.button:disabled,
+.button[disabled] {
+  pointer-events: none;
+  
+  &:after {
+    background-color: #E6E6E6;
+  }
+}
+
+.button.primary {
+  color: #fff;
+  
+  &:after {
+    background-color: #000;
+  }
+  
+  &:disabled,
+  &[disabled] {
+    background-color: #E6E6E6;
+  }
+}
+
+
+.button.secondary {
+  color: #000;
+  
+  &:after {
+    background-color: #fff;
+    border: 1px solid #000;
+  }
+  
+  &:disabled,
+  &[disabled] {
+    color: #E6E6E6;
+    
+    &:after {
+      border-color: #E6E6E6;
+    }
+  }
+  
+  &.background:after {
+    border: 1px solid #fff;
+  }
+}
+
+.button.active {
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 1.25em 0;
+  color: #000;
+  font-weight: 400;
+  opacity: 1;
+  
+  &:after {
+    background-color: #fff;
+    border: 1px solid #E6E6E6;
+    transform: scale(0.95);
+  }
+  
+  .label,
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0 1em;
+  }
+  
+  .label .text {
+    text-transform: none;
+    letter-spacing: 0;
+    transform: translateX(0);
+    transition: transform 400ms linear;
+  }
+  
+  .actions {    
+    button {
+      min-width: 0;
+      padding: 0.25em;
+      margin: 0 0.5em;
+      background: none;
+      border: none;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 300ms;
+      transition-delay: 100ms;
+      
+      &:after {
+        display: none;
+      }
+    }
+    
+    span {
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(25%);
+      transition: all 300ms;
+      transition-delay: 200ms;
+    }
+  }
+  
+  .show-active & {
+    &:after {
+      transform: scale(1);
+    }
+    
+    .label .text {
+      transform: translateX(0.5em);
+    }
+    
+    .actions {
+      span {
+        opacity: 1;
+        transform: translateY(0); 
+      }
+      button {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.trigger-area {
+  padding: 2rem 2rem 1rem 2rem;
+}
+
+.button.icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 2em;
+  min-width: 0;
+  padding: 0.5em 1em;
+  max-width: 4em;
+  height: 4em;
+  z-index: 1;
+  transition: all 300ms linear;
+  
+  &:after {
+    border-radius: 2em;
+  }
+ 
+  i {
+    font-size: 2em;
+  }
+  
+  span {
+    white-space: nowrap;
+    margin-left: 0.5em;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 200ms linear;
+  }
+  
+  // We want the button to animate when its container is hovered over. Using transitions here allows us to easily reverse the animation on mouseout
+  .trigger-area:hover & {
+    max-width: 200px;
+    span {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  
+  &:focus {
+    outline: 0;
+  }
+  
+  &:hover:after {
+    transform: scale(1.1);
+  }
+  
+  &:active:after {
+    transform: scale(0.95);
+  }
+}
+
+.button.compact {
+  padding: 1rem;
+  min-width: 72px;
+}
+
+// "Burst" lines around the checkmark. This animation will only play when the element is first rendered / not hidden
+.burst {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  
+  svg {
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    opacity: 0;
+  }
+  
+  .checkmark {
+    position: relative;
+    display: block;
+    z-index: 1;
+    
+    i {
+      animation: grow 400ms linear forwards;
+    }
+  }
+  
+  &::after {
+    content: '';
+    display: block;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    z-index: 0;
+  }
+  
+  // When the container has the 'show-active' class, start the animations
+  .show-active & {
+    svg {
+      animation: growSvg 800ms ease-in-out forwards;
+    }
+    
+    &::after {
+      animation: scaleOut 400ms linear forwards;
+      animation-delay: 400ms;
+    }
+  }
+}
+
+// Active 'Add to Bag' button switch
+.button-container {
+  position: relative;
+  
+  .button {
+    min-width: 250px;
+  }
+  
+  // We need to stack the two buttons on top of each other, so one needs to be absolutely positioned.
+  // This solution isn't ideal; this button should likely be a stateful React component (or something equivalent) to render the button elements. We don't want to render more than what should be visible on page-load.
+  .button.active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    transition-delay: -100ms;
+  }
+  
+  .button:not(.active) {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+  }
+  
+  // Hide the black button and show the white (active) one
+  &.show-active {
+    .button:not(.active) {
+      opacity: 0;
+      z-index: -1;
+      transition:  opacity 100ms linear;
+      
+      &:after {
+        transition: transform 100ms linear;
+      }
+    }
+    .button.active {
+      opacity: 1;
+      transition: opacity 100ms linear;
+    }
+  }
+
+}
+
+// Various keyframes for button animations
+@keyframes grow {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes growSvg {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+ 90% {
+   opacity: 0;
+   visibility: hidden;
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  50% {
+    transform: scale(2);
+  }
+    
+  100% {
+    visibility: hidden;
+  }
+}

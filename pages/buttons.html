@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--  Meta  -->
+    <meta charset="UTF-8">
+    <title>My New Project!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  Styles  -->
+    <script src="https://kit.fontawesome.com/64ca729ce3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+  </head>
+  <body>
+    <a class="primary icon reverse" href="/">
+      <i class="fas fa-arrow-left"></i> Back
+    </a>
+    
+    <h1>Buttons</h1>
+
+    <h2>Primary</h2>
+
+    <h3>Regular</h3>
+    <button class="button primary" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    
+    <h3>Compact</h3>
+    <button class="button primary compact" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    
+    <h2>Secondary</h2>
+    <h3>Regular Outline</h3>
+      <button class="button secondary" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    <h3>Regular Background</h3>
+    <div class="bg--dark">
+      <button class="button secondary background" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    </div>
+    
+    <h3>Compact Outline</h3>
+    <button class="button secondary compact" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    <h3>Compact Background</h3>
+    <div class="bg--dark">
+      <button class="button secondary background compact" type="button"><i class="fas fa-plus"></i> <span>Label</span></button>
+    </div>
+  
+    <h2>Button with Active State</h2>
+    <div class="button-container">
+      <button class="button primary" type="button" onClick="showActive(this)"><i class="fas fa-plus"></i> <span>Add to Bag</span></button>
+      <div class="button active">
+        <div class="label">
+          <div class="burst">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+              <g>
+                <rect id="top-left" width="48" height="2" x="1" y="23" transform="rotate(60, 24, 22)"/>
+                <rect id="horizontal" width="48" height="2" y="21"/>
+                <rect id="top-right" width="48" height="2" x="1" y="23" transform="rotate(-60, 22, 24)"/>
+              </g>
+            </svg>
+            <span class="checkmark"><i class="fas fa-check"></i></span>
+          </div>
+          <span class="text">Added</span>
+        </div>
+        <div class="actions">
+          <button class="increment increment--down" type="button" onClick="qtyChange(this, 'down')"><i class="fas fa-minus"></i></button>
+          <span class="qty" data-count="0" data-max="10">0</span>
+          <button class="increment increment--up" type="button" onClick="qtyChange(this, 'up')"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Icon + Label Button</h2>
+    <div class="bg--dark trigger-area flex-end">
+      <button class="button primary icon" type="button"><i class="fas fa-shopping-bag"></i> <span>Add to Bag</span></button>
+    </div>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="/scripts/index.js"></script>
+  </body>
+</html>

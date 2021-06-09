@@ -1,0 +1,12 @@
+{
+  "name": "ulta-animations",
+  "version": "1.0.0",
+  "description": "Ulta Animations Sandbox",
+  "main": "index.js",
+  "author": "jiminikiz",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "serve": "npx serve -p 7999"
+  }
+}
